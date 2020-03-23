@@ -1,6 +1,6 @@
 # github-secrets
 
-Manage your [GitHub Actions](https://github.com/features/actions) secrets, with a simple cli.
+Manage your [GitHub Actions](https://github.com/features/actions) secrets, with a Python script
 
 ## Getting Started
 
