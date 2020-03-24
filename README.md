@@ -4,6 +4,10 @@ Manage your [GitHub Actions](https://github.com/features/actions) secrets, with 
 
 ![Usage-Example](./assets/github-secrets-usage.gif)
 
+## Requirements
+1. python 3.6+
+1. [pyncal](https://pynacl.readthedocs.io/en/stable/public/#nacl-public-sealedbox) - available via pip
+
 ## Getting Started
 
 ### Authentication
