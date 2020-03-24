@@ -2,6 +2,8 @@
 
 Manage your [GitHub Actions](https://github.com/features/actions) secrets, with a simple Python script
 
+![Usage-Example](./assets/github-secrets-usage.gif)
+
 ## Getting Started
 
 ### Authentication
