@@ -60,7 +60,7 @@ def request(method, args_dict, api_path, parameters={}):
             json=parameters,
             headers=headers
         )
-    else:
+    elif args_dict['github_credentials']['GITHUB_USERNAME'] and args_dict['github_credentials']['GITHUB_PASSWORD']:
         # Using Username and Password
         req = requests.request(
             method,
@@ -71,6 +71,8 @@ def request(method, args_dict, api_path, parameters={}):
                 args_dict['github_credentials']['GITHUB_PASSWORD']
             )
         )
+    else:
+        raise Exception('Did not supply credentials')
     return req
 
 
@@ -78,9 +80,6 @@ def read_creds():
     """Reads credentials from Environment Variables, if fails, tries from Creds file"""
     required_args = [
         'GITHUB_ORGANIZATION',
-        'GITHUB_USERNAME',
-        'GITHUB_PASSWORD',
-        'GITHUB_OAUTH_TOKEN'
     ]
 
     creds = {}
