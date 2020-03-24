@@ -24,10 +24,10 @@ Available authentication arguments, ordered by precedence
 2. Creds File - create a file `.github_creds.json`, and execute this app from the same directory
     ```
     {
-    "GITHUB_USERNAME": "",
-    "GITHUB_PASSWORD": "",
-    "GITHUB_ORGANIZATION": "",
-    "GITHUB_OAUTH_TOKEN": ""
+       "GITHUB_USERNAME": "",
+       "GITHUB_PASSWORD": "",
+       "GITHUB_ORGANIZATION": "",
+       "GITHUB_OAUTH_TOKEN": ""
     }
     ```
 
