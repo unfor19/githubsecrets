@@ -43,7 +43,7 @@ help
 ```
 
 #### Using Shell
-Download the file - `github-secrets.py`
+Download the file - [github-secrets.py](https://raw.githubusercontent.com/unfor19/github-secrets/master/github-secrets.py)
 
 ##### Environment Variables
 
