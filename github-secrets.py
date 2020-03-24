@@ -49,7 +49,7 @@ def encrypt(public_key: str, secret_value: str) -> str:
     return b64encode(encrypted).decode("utf-8")
 
 
-def request(method, args_dict, api_path, parameters={}):
+def request(method, args_dict, api_path, parameters={}) -> requests.request:
     full_url = f"{args_dict['base_url']}/{api_path}"
     if args_dict['github_credentials']['GITHUB_OAUTH_TOKEN']:
         # Using OAUTH Token
@@ -76,7 +76,7 @@ def request(method, args_dict, api_path, parameters={}):
     return req
 
 
-def read_creds():
+def read_creds() -> dict:
     """Reads credentials from Environment Variables, if fails, tries from Creds file"""
     required_args = [
         'GITHUB_ORGANIZATION',
@@ -110,12 +110,12 @@ def read_creds():
     return creds
 
 
-def get_public_key(args_dict):
+def get_public_key(args_dict) -> requests.request:
     """Get the repository's public key, used when creating/updating a secret"""
     return request('get', args_dict, 'actions/secrets/public-key')
 
 
-def get_secret(args_dict):
+def get_secret(args_dict) -> requests.request:
     """Get a secret"""
     return request(
         'get',
