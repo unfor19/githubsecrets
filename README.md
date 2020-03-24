@@ -1,8 +1,19 @@
 # github-secrets
 
-Manage your [GitHub Actions](https://github.com/features/actions) secrets, with a simple Python script
+Manage your [GitHub Actions](https://github.com/features/actions) secrets, with a simple Python script.
+
+This script acts as a GitHub Actions secrets cli, here's how it works
 
 ![Usage-Example](./assets/github-secrets-usage.gif)
+
+## Requirements
+1. python 3.6+
+1. Packages in requirements file
+   - [requests](https://pypi.org/project/requests/)
+   - [pyncal](https://pynacl.readthedocs.io/en/stable/public/#nacl-public-sealedbox)
+   ```bash
+   pip install -r https://raw.githubusercontent.com/unfor19/github-secrets/master/requirements.txt
+   ```
 
 ## Getting Started
 
@@ -32,6 +43,15 @@ Available authentication arguments, ordered by precedence
     ```
 
 ### Usage
+__IMPORTANT__ - in order to avoid exposing your secrets in the shell's history, put a whitespace before executing the script, here's an example, read more [here](https://unix.stackexchange.com/a/49216/368610)
+```
+$  echo "hello world"
+  ^ whitespace
+  
+$ history | tail -n 10
+...
+# results won't show echo "hello world"
+```
 
 #### Available ACTIONs
 ```
