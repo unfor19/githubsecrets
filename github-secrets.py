@@ -124,9 +124,13 @@ def get_secret(args_dict):
     )
 
 
-def apply_secret(args_dict):
+def apply_secret(args_dict) -> requests.request:
     """Create or update a secret"""
-    public_key = get_public_key(args_dict).json()
+    public_key = get_public_key(args_dict)
+    if public_key.status_code >= 300 or public_key.status_code < 200:
+        raise Exception(public_key.text)
+    else:
+        public_key = public_key.json()
     encrypted_value = encrypt(public_key['key'], args_dict['secret_value'])
 
     parameters = {
@@ -142,7 +146,7 @@ def apply_secret(args_dict):
     )
 
 
-def list_secrets(args_dict):
+def list_secrets(args_dict) -> requests.request:
     """Lists all secrets in repository"""
     return request(
         'get',
@@ -151,7 +155,7 @@ def list_secrets(args_dict):
     )
 
 
-def delete_secret(args_dict):
+def delete_secret(args_dict) -> requests.request:
     """Delete a secret"""
     return request(
         'delete',
