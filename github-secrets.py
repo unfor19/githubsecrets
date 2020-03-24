@@ -21,17 +21,17 @@ def usage():
 
     Using Shell
     ===========
-    $ export GITHUB_USERNAME=my_username GITHUB_PASSWORD=my_password GITHUB_ORGANIZATION=my_organization
+    $ GITHUB_ORGANIZATION=my_organization export GITHUB_USERNAME=my_username GITHUB_PASSWORD=my_password
     $ python3 github-actions.py ACTION REPO_NAME [SECRET_NAME] [SECRET_VALUE]
 
     Using Docker
     ============
     $ docker run --rm \\
         -v ./.github_secrets.json:/code/.github_creds.json \\
+        -e GITHUB_ORGANIZATION=my_organization \\        
+        -e GITHUB_OAUTH_TOKEN=my_oauth_token \\
         -e GITHUB_USERNAME=my_username \\
         -e GITHUB_PASSWORD=my_password \\
-        -e GITHUB_ORGANIZATION=my_organization \\
-        -e GITHUB_OAUTH_TOKEN=my_oauth_token \\
         unfor19/github-secrets ACTION REPO_NAME [SECRET_NAME] [SECRET_VALUE]
     """)
     exit()
@@ -77,9 +77,10 @@ def request(method, args_dict, api_path, parameters={}):
 def read_creds():
     """Reads credentials from Environment Variables, if fails, tries from Creds file"""
     required_args = [
+        'GITHUB_ORGANIZATION',
         'GITHUB_USERNAME',
         'GITHUB_PASSWORD',
-        'GITHUB_ORGANIZATION'
+        'GITHUB_OAUTH_TOKEN'
     ]
 
     creds = {}

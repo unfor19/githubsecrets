@@ -17,17 +17,17 @@ Available authentication methods, ordered by precedence
 #### Auth arguments
 Available authentication arguments, ordered by precedence
 1. Environment Variables
-   - GITHUB_USERNAME
-   - GITHUB_PASSWORD
    - GITHUB_ORGANIZATION
    - GITHUB_OAUTH_TOKEN
+   - GITHUB_USERNAME
+   - GITHUB_PASSWORD   
 2. Creds File - create a file `.github_creds.json`, and execute this app from the same directory
     ```
     {
-    "GITHUB_USERNAME": "",
-    "GITHUB_PASSWORD": "",
-    "GITHUB_ORGANIZATION": "",
-    "GITHUB_OAUTH_TOKEN": ""
+        "GITHUB_ORGANIZATION": "",
+        "GITHUB_OAUTH_TOKEN": "",
+        "GITHUB_USERNAME": "",
+        "GITHUB_PASSWORD": ""
     }
     ```
 
@@ -48,9 +48,15 @@ Download the file - `github-secrets.py`
 ##### Environment Variables
 
 ```bash
-$ export GITHUB_USERNAME=my_username GITHUB_PASSWORD=my_password GITHUB_ORGANIZATION=my_organization
+$ export GITHUB_ORGANIZATION=my_organization GITHUB_USERNAME=my_username GITHUB_PASSWORD=my_password
 $ python3 github-actions.py ACTION REPO_NAME [SECRET_NAME] [SECRET_VALUE]
 ```
+
+```bash
+$ export GITHUB_ORGANIZATION=my_organization GITHUB_OAUTH_TOKEN=my_token
+$ python3 github-actions.py ACTION REPO_NAME [SECRET_NAME] [SECRET_VALUE]
+```
+
 ##### Creds File
 
 ```bash
