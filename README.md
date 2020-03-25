@@ -1,8 +1,14 @@
 # github-secrets
 
-Manage your [GitHub Actions](https://github.com/features/actions) secrets, with a simple Python script
+Manage your [GitHub Actions](https://github.com/features/actions) secrets, with a simple Python script.
+
+This script acts as a GitHub Actions secrets cli, here's how it works
 
 ![Usage-Example](./assets/github-secrets-usage.gif)
+
+## Requirements
+1. python 3.6+
+1. [pyncal](https://pynacl.readthedocs.io/en/stable/public/#nacl-public-sealedbox) - available via pip
 
 ## Getting Started
 
