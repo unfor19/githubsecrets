@@ -8,7 +8,12 @@ This script acts as a GitHub Actions secrets cli, here's how it works
 
 ## Requirements
 1. python 3.6+
-1. [pyncal](https://pynacl.readthedocs.io/en/stable/public/#nacl-public-sealedbox) - available via pip
+1. Packages in requirements file
+   - [requests](https://pypi.org/project/requests/)
+   - [pyncal](https://pynacl.readthedocs.io/en/stable/public/#nacl-public-sealedbox)
+   ```bash
+   pip install -r https://raw.githubusercontent.com/unfor19/github-secrets/master/requirements.txt
+   ```
 
 ## Getting Started
 
