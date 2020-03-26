@@ -43,6 +43,15 @@ Available authentication arguments, ordered by precedence
     ```
 
 ### Usage
+__IMPORTANT__ - in order to avoid exposing your secrets in the shell's history, put a whitespace before executing the script, here's an example, read more [here](https://unix.stackexchange.com/a/49216/368610)
+```
+$  echo "hello world"
+  ^ whitespace
+  
+$ history | tail -n 10
+...
+# results won't show echo "hello world"
+```
 
 #### Available ACTIONs
 ```
