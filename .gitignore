@@ -1,3 +1,6 @@
 .*
 !.gitignore
 ENV/
+__pycache__
+*.egg*
+dist/
