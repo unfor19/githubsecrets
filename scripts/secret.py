@@ -54,8 +54,8 @@ Fix with: ghs profile-apply -p {self.profile.name}
             """)
             exit()
         self.repository = repository
-        self.name = name
-        self.value = value
+        self.name = name.strip()
+        self.value = value.strip()
         self.base_url = "/".join([
             "https://api.github.com/repos",
             self.profile.github_owner,
@@ -76,7 +76,7 @@ Fix with: ghs profile-apply -p {self.profile.name}
                 public_key = self.public_key.json()
 
             encrypted_value = Secret.encrypt(
-                public_key['key'], self.name)
+                public_key['key'], self.value)
 
             parameters = {
                 "encrypted_value": encrypted_value,

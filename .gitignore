@@ -1,6 +1,8 @@
 .*
 !.gitignore
+!.github*
 ENV/
 __pycache__
 *.egg*
 dist/
+build/
