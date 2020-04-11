@@ -1,5 +1,7 @@
 # github-secrets
 
+![Publish to PyPi](https://github.com/unfor19/githubsecrets/workflows/Upload%20Python%20Package/badge.svg)
+
 A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https://github.com/features/actions)
 
 ![Usage-Example](./assets/github-secrets-usage.gif)
