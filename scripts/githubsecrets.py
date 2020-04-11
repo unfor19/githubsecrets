@@ -21,10 +21,7 @@ def init():
 @pass_config
 @click.option('--profile-name', '-p', prompt=True)
 @click.option('--github-owner', '-o', prompt=True)
-@click.option(
-    '--personal-access-token', '-t',
-    prompt=True, hide_input=True, confirmation_prompt=True
-)
+@click.option('--personal-access-token', '-t', prompt=True, hide_input=True)
 def profile_apply(config, profile_name, github_owner, personal_access_token):
     """Create or modify a profile"""
     profile = Profile(profile_name)
@@ -52,7 +49,7 @@ def profile_list(config):
 @click.option('--repository', '-r', prompt=True)
 @click.option('--profile-name', '-p', prompt=True)
 @click.option('--secret-name', '-s', prompt=True)
-@click.option('--secret-value', '-v', prompt=True, hide_input=True, confirmation_prompt=True)  # noqa: E501
+@click.option('--secret-value', '-v', prompt=True, hide_input=True)  # noqa: E501
 def secret_apply(config, repository, profile_name, secret_name, secret_value):
     """Create or modify a secret in a GitHub repository"""
     profile = Profile(profile_name)
