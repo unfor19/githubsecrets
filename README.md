@@ -1,6 +1,6 @@
 # github-secrets
 
-![Publish to PyPi](https://github.com/unfor19/githubsecrets/workflows/Upload%20Python%20Package/badge.svg)
+![Release Version](https://img.shields.io/github/v/release/unfor19/githubsecrets) ![Open Issues](https://img.shields.io/github/issues-raw/unfor19/githubsecrets) ![PyPi Downloads](https://img.shields.io/pypi/dm/githubsecrets) ![License MIT](https://img.shields.io/github/license/unfor19/githubsecrets)
 
 A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https://github.com/features/actions)
 
