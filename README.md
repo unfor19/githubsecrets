@@ -109,4 +109,4 @@ Created and maintained by [Meir Gabay](https://github.com/unfor19)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/unfor19/serverless-template/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/unfor19/githubsecrets/blob/master/LICENSE) file for details
