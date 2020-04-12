@@ -1,4 +1,4 @@
-# github-secrets
+# githubsecrets
 
 ![Release Version](https://img.shields.io/github/v/release/unfor19/githubsecrets) [![Build Status](https://cloud.drone.io/api/badges/unfor19/githubsecrets/status.svg)](https://cloud.drone.io/unfor19/githubsecrets) ![Open Issues](https://img.shields.io/github/issues-raw/unfor19/githubsecrets) ![PyPi Downloads](https://img.shields.io/pypi/dm/githubsecrets) ![License MIT](https://img.shields.io/github/license/unfor19/githubsecrets)
 
@@ -8,7 +8,7 @@ A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https
 
 ## Requirements
 
-- Python v3.6.9 and above
+- Python v3.6.7 and above
 
 - POSIX - Linux, macOS or Windows with [Git Bash](https://gitforwindows.org/)
 
@@ -24,18 +24,18 @@ $ pip install githubsecrets
 
 ## Getting Started
 
-1. Initialize this application - Creates credentials files at `~/.githubsecrets/credentials`
+1. Initialize this application - Creates a credential file at `~/.githubsecrets/credentials`
 
    ```bash
    $ ghs init
    ```
 
-1. [Create a GitHub Personal-Access-Token](https://github.com/settings/tokens) with the following permssions:
+1. [Generate a GitHub Personal-Access-Token](https://github.com/settings/tokens) with the following permssions:
 
    - repo (all)
    - admin:public_key > read:public_key
 
-1. Save the token in a safe place, we'll use it in a second
+1. Save the token in a safe place, we'll use it in the next step
 
 1. Create a profile
 
