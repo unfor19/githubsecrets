@@ -21,9 +21,9 @@ setup(
     url='https://github.com/unfor19/githubsecrets',
     download_url=f'https://github.com/unfor19/githubsecrets/archive/v{version}.tar.gz',  # noqa: E501
     install_requires=[
-        'Click',
-        'pynacl',
-        'requests'
+        'Click==7.1.1',
+        'PyNaCl==1.3.0',
+        'requests==2.23.0'
     ],
     entry_points='''
         [console_scripts]
