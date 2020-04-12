@@ -1,0 +1,18 @@
+---
+kind: pipeline
+type: docker
+name: testing-3.6.7
+
+steps:
+  - name: install
+    image: python:3.6.7-slim
+    commands:
+      - pip install -r requirements.txt
+      - pip install --editable .
+  - name: run-test
+    image: python:3.6.7-slim
+    environment:
+      GITHUB_TOKEN:
+        from_secret: GITHUB_TOKEN
+    commands:
+      - bash test_functionality.sh

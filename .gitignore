@@ -6,3 +6,4 @@ __pycache__
 *.egg*
 dist/
 build/
+!.drone.yml
