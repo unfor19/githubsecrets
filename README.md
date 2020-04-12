@@ -1,4 +1,4 @@
-# github-secrets
+# githubsecrets
 
 ![Release Version](https://img.shields.io/github/v/release/unfor19/githubsecrets) ![Python Versions](https://img.shields.io/pypi/pyversions/githubsecrets) ![Test Functionality](https://img.shields.io/travis/com/unfor19/githubsecrets?label=test) ![Open Issues](https://img.shields.io/github/issues-raw/unfor19/githubsecrets) ![PyPi Downloads](https://img.shields.io/pypi/dm/githubsecrets) ![License MIT](https://img.shields.io/github/license/unfor19/githubsecrets)
 
