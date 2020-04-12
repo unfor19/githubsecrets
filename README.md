@@ -24,18 +24,18 @@ $ pip install githubsecrets
 
 ## Getting Started
 
-1. Initialize this application - Creates credentials files at `~/.githubsecrets/credentials`
+1. Initialize this application - Creates a credential file at `~/.githubsecrets/credentials`
 
    ```bash
    $ ghs init
    ```
 
-1. [Create a GitHub Personal-Access-Token](https://github.com/settings/tokens) with the following permssions:
+1. [Generate a GitHub Personal-Access-Token](https://github.com/settings/tokens) with the following permssions:
 
    - repo (all)
    - admin:public_key > read:public_key
 
-1. Save the token in a safe place, we'll use it in a second
+1. Save the token in a safe place, we'll use it in the next step
 
 1. Create a profile
 
