@@ -8,7 +8,7 @@ A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https
 
 ## Requirements
 
-- Python v3.6.9 and above
+- Python v3.6.7 and above
 
 - POSIX - Linux, macOS or Windows with [Git Bash](https://gitforwindows.org/)
 
