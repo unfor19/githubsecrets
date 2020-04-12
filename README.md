@@ -16,10 +16,27 @@ A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https
 
 ### pip
 
-Available at [PyPi](https://pypi.org/project/githubsecrets/)
+Install with pip on your machine, the package available at [PyPi](https://pypi.org/project/githubsecrets/)
 
 ```bash
 $ pip install githubsecrets
+```
+
+### Docker
+
+Mount your home directory to `root`, the image available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
+
+The image runs as a CLI, you only need to provide the arguments, for example
+
+```bash
+
+# available commands
+$ docker run -v $HOME:/root githubsecrets --help
+Usage: ghs [OPTIONS] COMMAND [ARGS]...
+...
+
+# create credentials file
+$ docker run --rm -v $HOME:/root githubsecrets init
 ```
 
 ## Getting Started
