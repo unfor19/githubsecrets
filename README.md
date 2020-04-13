@@ -12,7 +12,7 @@ A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https
 
 Python v3.6.7 and above
 
-Install with pip on your machine, the package is available at [PyPi](https://pypi.org/project/githubsecrets/)
+Install with pip on your machine; the package is available at [PyPi](https://pypi.org/project/githubsecrets/)
 
 ```bash
 $ pip install githubsecrets
@@ -22,7 +22,7 @@ $ pip install githubsecrets
 
 Mount your home directory to `root`, the image is available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
 
-The image runs as a CLI, you must provide arguments, prompts are not available while running in Docker
+The image runs as a CLI; you must provide arguments, prompts are not available while running in Docker
 
 ```bash
 
@@ -63,7 +63,7 @@ $ pip install --editable .
    - repo (all)
    - admin:public_key > read:public_key
 
-1. Save the token in a safe place, we'll use it in the next step
+1. Save the token in a safe place; we'll use it in the next step
 
 1. Create a profile, use the `-p` flag and supply a profile name
 
@@ -75,7 +75,7 @@ $ pip install --editable .
 
    You'll be prompted to insert:
 
-   - Github owner- which is your GitHub Organization or GitHub Account name (not email address)
+   - Github owner - which is your GitHub Organization or GitHub Account name (not email address)
    - Personal access token - that you've created in the previous steps
 
 1. Create a GitHub secret
