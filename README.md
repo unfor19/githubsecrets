@@ -6,15 +6,11 @@ A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https
 
 ![Usage-Example](./assets/github-secrets-usage.gif)
 
-## Requirements
-
-- Python v3.6.7 and above
-
-- POSIX - Linux, macOS or Windows with [Git Bash](https://gitforwindows.org/)
-
 ## Installation
 
 ### pip
+
+Python v3.6.7 and above
 
 Install with pip on your machine, the package is available at [PyPi](https://pypi.org/project/githubsecrets/)
 
@@ -69,7 +65,7 @@ $ pip install --editable .
 
 1. Save the token in a safe place, we'll use it in the next step
 
-1. Create a profile
+1. Create a profile, use the `-p` flag and supply a profile name
 
    ```bash
    $ ghs profile-apply -p willy_wonka
@@ -79,7 +75,7 @@ $ pip install --editable .
 
    You'll be prompted to insert:
 
-   - Github owner- which is your GitHub Organization or GitHub Account name
+   - Github owner- which is your GitHub Organization or GitHub Account name (not email address)
    - Personal access token - that you've created in the previous steps
 
 1. Create a GitHub secret
