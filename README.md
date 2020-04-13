@@ -26,17 +26,32 @@ $ pip install githubsecrets
 
 Mount your home directory to `root`, the image available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
 
-The image runs as a CLI, you only need to provide the arguments, for example
+The image runs as a CLI, you must provide arguments, prompts are not available while running in Docker
 
 ```bash
 
 # available commands
-$ docker run -v $HOME:/root githubsecrets --help
+$ docker run -v $HOME:/root unfor19/githubsecrets --help
 Usage: ghs [OPTIONS] COMMAND [ARGS]...
 ...
 
 # create credentials file
-$ docker run --rm -v $HOME:/root githubsecrets init
+$ docker run --rm -v $HOME:/root unfor19/githubsecrets init
+```
+
+### Build
+
+You can easily build from source with
+```bash
+$ git clone https://github.com/unfor19/githubsecrets.git && cd githubsecrets
+...
+$ pip install --upgrade pip
+...
+$ pip install -r requirements.txt
+...
+$ pip install --editable .
+...
+# Done!
 ```
 
 ## Getting Started
@@ -84,7 +99,7 @@ $ docker run --rm -v $HOME:/root githubsecrets init
 - 204 - success
 - 404 - secret or repository not found
 
-## Available commands
+### Available commands
 
 View all available commands with `ghs --help`
 
