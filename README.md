@@ -106,6 +106,27 @@ $ pip install --editable .
 
    - Secret name
    - Secret value
+1. Use it in your [GitHub Actions Workflows](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions)
+   - Snippet
+     ```yml
+     steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.6"
+      - name: Install dependencies
+        run: |
+          ...
+      - name: Build and publish
+        env:
+          TWINE_USERNAME: ${{ secrets.PIP_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PIP_PASSWORD }}
+          ...
+        run: |
+          ...
+     ```
+   - I'm using secrets in this repository, check out [this repository's workflows](https://github.com/unfor19/githubsecrets/tree/master/.github/workflows)
 
 ### Status codes
 
