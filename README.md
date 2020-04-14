@@ -4,7 +4,7 @@
 
 ![GithubSecrets-Website](https://githubsecrets.s3-eu-west-1.amazonaws.com/githubsecrets-website-gradient.png)
 
-A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https://github.com/features/actions)
+Manage your [GitHub Actions](https://github.com/features/actions) secrets, with a simple CLI
 
 <details><summary>
 GIF Demo
