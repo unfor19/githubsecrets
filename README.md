@@ -155,6 +155,8 @@ Pull requests are welcome! Ideally, create a feature branch and issue for every 
 
 Created and maintained by [Meir Gabay](https://github.com/unfor19)
 
+Design by [facebook.com/KerenOrDesign](https://facebook.com/KerenOrDesign)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/unfor19/githubsecrets/blob/master/LICENSE) file for details
