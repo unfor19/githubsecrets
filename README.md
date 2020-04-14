@@ -1,6 +1,6 @@
 # githubsecrets
 
-![Release Version](https://img.shields.io/github/v/release/unfor19/githubsecrets) [![Build Status](https://cloud.drone.io/api/badges/unfor19/githubsecrets/status.svg)](https://cloud.drone.io/unfor19/githubsecrets) ![Open Issues](https://img.shields.io/github/issues-raw/unfor19/githubsecrets) ![PyPi Downloads](https://img.shields.io/pypi/dm/githubsecrets) ![License MIT](https://img.shields.io/github/license/unfor19/githubsecrets)
+[![Build Status](https://cloud.drone.io/api/badges/unfor19/githubsecrets/status.svg)](https://cloud.drone.io/unfor19/githubsecrets) ![License MIT](https://img.shields.io/github/license/unfor19/githubsecrets)
 
 A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https://github.com/features/actions)
 
@@ -41,6 +41,7 @@ Mount your Temp directory, or any other directory to save the credentials file. 
 ```
 $ docker run --rm -v c:/Temp:/root unfor19/githubsecrets --help
 Usage: ghs [OPTIONS] COMMAND [ARGS]...
+...
 ```
 
 ### Build from source
