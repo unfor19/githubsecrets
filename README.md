@@ -20,24 +20,31 @@ $ pip install githubsecrets
 
 ### Docker
 
-Mount your home directory to `root`, the image is available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
+Mount local directory to `root`, the image is available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
 
 The image runs as a CLI; you must provide arguments, prompts are not available while running in Docker
 
-```bash
+#### Linux and macOS
 
-# available commands
+Mount your home directory, or any other directory to save the credentials file
+
+```bash
 $ docker run -v $HOME:/root unfor19/githubsecrets --help
 Usage: ghs [OPTIONS] COMMAND [ARGS]...
 ...
-
-# create credentials file
-$ docker run --rm -v $HOME:/root unfor19/githubsecrets init
 ```
 
-### Build
+#### Windows
 
-You can easily build from source with
+Mount your Temp directory, or any other directory to save the credentials file. Make sure you use `/` and not `\`
+
+```
+$ docker run --rm -v c:/Temp:/root unfor19/githubsecrets init
+Usage: ghs [OPTIONS] COMMAND [ARGS]...
+```
+
+### Build from source
+
 ```bash
 $ git clone https://github.com/unfor19/githubsecrets.git && cd githubsecrets
 ...
@@ -51,6 +58,8 @@ $ pip install --editable .
 ```
 
 ## Getting Started
+
+__Note__: When using Docker, no need to add `ghs`; supply only a command and its arguments
 
 1. Initialize this application - Creates a credential file at `~/.githubsecrets/credentials`
 
