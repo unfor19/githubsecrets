@@ -39,7 +39,7 @@ Usage: ghs [OPTIONS] COMMAND [ARGS]...
 Mount your Temp directory, or any other directory to save the credentials file. Make sure you use `/` and not `\`
 
 ```
-$ docker run --rm -v c:/Temp:/root unfor19/githubsecrets init
+$ docker run --rm -v c:/Temp:/root unfor19/githubsecrets --help
 Usage: ghs [OPTIONS] COMMAND [ARGS]...
 ```
 
