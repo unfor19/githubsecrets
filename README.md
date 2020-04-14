@@ -2,9 +2,17 @@
 
 [![testing](https://github.com/unfor19/githubsecrets/workflows/testing/badge.svg)](https://github.com/unfor19/githubsecrets/actions?query=workflow%3Atesting)
 
+![GithubSecrets-Website](https://githubsecrets.s3-eu-west-1.amazonaws.com/githubsecrets-website-gradient.png)
+
 A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https://github.com/features/actions)
 
+<details><summary>
+GIF Demo
+</summary>
+ 
 ![Usage-Example](./assets/github-secrets-usage.gif)
+
+</details>
 
 ## Installation
 
