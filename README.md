@@ -1,22 +1,18 @@
 # githubsecrets
 
-![Release Version](https://img.shields.io/github/v/release/unfor19/githubsecrets) [![Build Status](https://cloud.drone.io/api/badges/unfor19/githubsecrets/status.svg)](https://cloud.drone.io/unfor19/githubsecrets) ![Open Issues](https://img.shields.io/github/issues-raw/unfor19/githubsecrets) ![PyPi Downloads](https://img.shields.io/pypi/dm/githubsecrets) ![License MIT](https://img.shields.io/github/license/unfor19/githubsecrets)
+[![Build Status](https://cloud.drone.io/api/badges/unfor19/githubsecrets/status.svg)](https://cloud.drone.io/unfor19/githubsecrets)
 
 A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https://github.com/features/actions)
 
 ![Usage-Example](./assets/github-secrets-usage.gif)
 
-## Requirements
-
-- Python v3.6.7 and above
-
-- POSIX - Linux, macOS or Windows with [Git Bash](https://gitforwindows.org/)
-
 ## Installation
 
 ### pip
 
-Install with pip on your machine, the package available at [PyPi](https://pypi.org/project/githubsecrets/)
+Python v3.6.7 and above
+
+Install with pip on your machine; the package is available at [PyPi](https://pypi.org/project/githubsecrets/)
 
 ```bash
 $ pip install githubsecrets
@@ -24,22 +20,47 @@ $ pip install githubsecrets
 
 ### Docker
 
-Mount your home directory to `root`, the image available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
+Mount local directory to `root`, the image is available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
 
-The image runs as a CLI, you only need to provide the arguments, for example
+The image runs as a CLI; you must provide arguments, prompts are not available while running in Docker
+
+#### Linux and macOS
+
+Mount your home directory, or any other directory to save the credentials file
 
 ```bash
-
-# available commands
-$ docker run -v $HOME:/root githubsecrets --help
+$ docker run -v $HOME:/root unfor19/githubsecrets --help
 Usage: ghs [OPTIONS] COMMAND [ARGS]...
 ...
+```
 
-# create credentials file
-$ docker run --rm -v $HOME:/root githubsecrets init
+#### Windows
+
+Mount your Temp directory, or any other directory to save the credentials file. Make sure you use `/` and not `\`
+
+```
+$ docker run --rm -v c:/Temp:/root unfor19/githubsecrets --help
+Usage: ghs [OPTIONS] COMMAND [ARGS]...
+...
+```
+
+### Build from source
+
+```bash
+$ git clone https://github.com/unfor19/githubsecrets.git && cd githubsecrets
+...
+$ pip install --upgrade pip
+...
+$ pip install -r requirements.txt
+...
+$ pip install --editable .
+...
+# Done!
 ```
 
 ## Getting Started
+
+__Note__: When using Docker, no need to add `ghs`; supply only a command and its arguments
 
 1. Initialize this application - Creates a credential file at `~/.githubsecrets/credentials`
 
@@ -52,9 +73,9 @@ $ docker run --rm -v $HOME:/root githubsecrets init
    - repo (all)
    - admin:public_key > read:public_key
 
-1. Save the token in a safe place, we'll use it in the next step
+1. Save the token in a safe place; we'll use it in the next step
 
-1. Create a profile
+1. Create a profile, use the `-p` flag and supply a profile name
 
    ```bash
    $ ghs profile-apply -p willy_wonka
@@ -64,7 +85,7 @@ $ docker run --rm -v $HOME:/root githubsecrets init
 
    You'll be prompted to insert:
 
-   - Github owner- which is your GitHub Organization or GitHub Account name
+   - Github owner - which is your GitHub Organization or GitHub Account name (not email address)
    - Personal access token - that you've created in the previous steps
 
 1. Create a GitHub secret
@@ -84,7 +105,7 @@ $ docker run --rm -v $HOME:/root githubsecrets init
 - 204 - success
 - 404 - secret or repository not found
 
-## Available commands
+### Available commands
 
 View all available commands with `ghs --help`
 
