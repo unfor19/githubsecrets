@@ -30,6 +30,16 @@ def create_artifacts():
 
 
 class Config(object):
+    def __init__(self, raise_error=True):
+        self.verbose = False
+        self.home_dir = f"{Path.home()}"
+        self.ghs_dir = f"{self.home_dir}/.githubsecrets"
+        self.credentials = f"{self.ghs_dir}/credentials"
+        self.errors = 0
+        self.errors_msg = ""
+        # self.validate(raise_error)
+        self.ci = False
+
     @staticmethod
     def get_credentials_content():
         config = Config()
@@ -59,15 +69,6 @@ class Config(object):
                 res['body'] = response.text
         res['status_code'] = response.status_code
         print(json.dumps(res, indent=4, sort_keys=True))
-
-    def __init__(self, raise_error=True):
-        self.verbose = False
-        self.home_dir = f"{Path.home()}"
-        self.ghs_dir = f"{self.home_dir}/.githubsecrets"
-        self.credentials = f"{self.ghs_dir}/credentials"
-        self.errors = 0
-        self.errors_msg = ""
-        self.validate(raise_error)
 
     def deserialize(self):
         return {
@@ -100,4 +101,20 @@ class Config(object):
             error_exit(self.errors_msg)
 
 
+class Validate(object):
+    def __init__(self, raise_error=True):
+        config = Config()
+        artifacts = config.deserialize()['artifacts']
+        config.errors_msg = "\nERROR: Missing files/folders\n"
+        for key, artifact in artifacts.items():
+            if not artifact['exists']:
+                config.errors_msg += f"{artifact['path']}\n"
+                config.errors += 1
+
+        if config.errors > 0 and raise_error:
+            config.errors_msg += "Fix it by executing: ghs init\n"
+            error_exit(config.errors_msg)
+
+
 pass_config = click.make_pass_decorator(Config, ensure=True)
+pass_validate = click.make_pass_decorator(Validate, ensure=True)

@@ -3,11 +3,28 @@ import requests
 import json
 from base64 import b64encode
 from nacl import encoding, public
+from .config import error_exit
 
 # Reference: https://developer.github.com/v3/actions/secrets/
 
 
 class Secret():
+    def __init__(self, config, profile, repository, name='', value=''):
+        self.profile = profile
+        if not profile.github_owner:
+            error_exit(f"""FAILED: Profile doesn't exist - {self.profile.name}
+Create it by executing:\nghs profile-apply -p {self.profile.name}
+            """)
+        self.repository = repository
+        self.name = name.strip()
+        self.value = value.strip()
+        self.base_url = "/".join([
+            "https://api.github.com/repos",
+            self.profile.github_owner,
+            self.repository
+        ])
+        self.config = config
+
     @staticmethod
     def encrypt(public_key: str, secret_value: str) -> str:
         """
@@ -45,22 +62,6 @@ class Secret():
     def get_public_key(self) -> requests.request:
         """Get the repository's public key, used when creating/updating a secret"""  # noqa: E501
         self.public_key = self.request('get', 'actions/secrets/public-key')
-
-    def __init__(self, profile, repository, name='', value=''):
-        self.profile = profile
-        if not profile.github_owner:
-            click.echo(f"""FAILED: Profile doesn't exist - {self.profile.name}
-Fix with: ghs profile-apply -p {self.profile.name}
-            """)
-            exit()
-        self.repository = repository
-        self.name = name.strip()
-        self.value = value.strip()
-        self.base_url = "/".join([
-            "https://api.github.com/repos",
-            self.profile.github_owner,
-            self.repository
-        ])
 
     def apply(self):
         """Create or update a secret"""
@@ -101,8 +102,15 @@ Fix with: ghs profile-apply -p {self.profile.name}
 
     def delete(self):
         """Delete a secret"""
-        response = self.request('delete', f"actions/secrets/{self.name}")
-        Secret.print_response(response)
+        confirm = False
+        if self.config.ci:
+            confirm = True
+        elif click.confirm(f"Are you sure want to delete the secret {self.name} ?"):  # noqa: E501
+            confirm = True
+
+        if confirm:
+            response = self.request('delete', f"actions/secrets/{self.name}")
+            Secret.print_response(response)
 
     def get(self):
         """Get a secret"""

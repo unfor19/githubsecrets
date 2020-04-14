@@ -3,11 +3,12 @@ from .config import Config, error_exit
 
 
 class Profile():
-    def __init__(self, name):
+    def __init__(self, config, name):
         self.name = name
         self.credentials_content = Config.get_credentials_content()
         self.github_owner = ''
         self.personal_access_token = ''
+        self.config = config
         if self.credentials_content and self.name in self.credentials_content:
             self.github_owner = self.credentials_content[self.name]['github_owner']  # noqa: E501
             self.personal_access_token = self.credentials_content[self.name]['personal_access_token']  # noqa: E501
@@ -55,7 +56,13 @@ class Profile():
     def delete(self):
         if self.name in self.credentials_content:
             del self.credentials_content[self.name]
-            if click.confirm(f"Are you sure want to delete the profile {self.name} ?"):  # noqa: E501
+            confirm = False
+            if self.config.ci:
+                confirm = True
+            elif click.confirm(f"Are you sure want to delete the profile {self.name} ?"):  # noqa: E501
+                confirm = True
+
+            if confirm:
                 write_success = Config.set_credentials_content(
                     self.credentials_content)
                 if write_success:
