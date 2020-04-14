@@ -10,7 +10,7 @@ A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https
 GIF Demo
 </summary>
  
-![Usage-Example](./assets/github-secrets-usage.gif)
+![Usage-Demo](https://githubsecrets.s3-eu-west-1.amazonaws.com/githubsecrets-demo.gif)
 
 </details>
 
