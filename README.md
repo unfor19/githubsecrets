@@ -1,6 +1,6 @@
 # githubsecrets
 
-[![Build Status](https://cloud.drone.io/api/badges/unfor19/githubsecrets/status.svg)](https://cloud.drone.io/unfor19/githubsecrets) ![License MIT](https://img.shields.io/github/license/unfor19/githubsecrets)
+[![Build Status](https://cloud.drone.io/api/badges/unfor19/githubsecrets/status.svg)](https://cloud.drone.io/unfor19/githubsecrets)
 
 A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https://github.com/features/actions)
 
