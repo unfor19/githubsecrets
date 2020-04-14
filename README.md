@@ -1,6 +1,6 @@
 # githubsecrets
 
-[![Build Status](https://cloud.drone.io/api/badges/unfor19/githubsecrets/status.svg)](https://cloud.drone.io/unfor19/githubsecrets)
+[![testing](https://github.com/unfor19/githubsecrets/workflows/testing/badge.svg)](https://github.com/unfor19/githubsecrets/actions?query=workflow%3Atesting)
 
 A simple CLI to manage GitHub secrets, that are used with [GitHub Actions](https://github.com/features/actions)
 
@@ -60,7 +60,7 @@ $ pip install --editable .
 
 ## Getting Started
 
-__Note__: When using Docker, no need to add `ghs`; supply only a command and its arguments
+**Note**: When using Docker, no need to add `ghs`; supply only a command and its arguments
 
 1. Initialize this application - Creates a credential file at `~/.githubsecrets/credentials`
 
