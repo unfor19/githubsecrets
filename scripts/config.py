@@ -2,6 +2,8 @@ from pathlib import Path
 from os import path, mkdir
 import json
 import click
+from cryptography.fernet import Fernet
+import keyring
 
 
 def error_exit(msg):
@@ -9,14 +11,47 @@ def error_exit(msg):
     exit()
 
 
-def create_artifacts():
-    config = Config(raise_error=False)
+def get_encryption_hash():
+    secret_hash = keyring.get_password("githubsecrets", "secret_hash")
+    if secret_hash:
+        return secret_hash.encode()
+    else:
+        return None
+
+
+def encrypt_data(data):
+    if isinstance(data, dict):
+        data = json.dumps(data)
+    if not isinstance(data, str):
+        error_exit("ERROR: Cannot encrypt non-strings")
+    encoded = data.encode()
+    fernet = Fernet(get_encryption_hash())
+    return fernet.encrypt(encoded)
+
+
+def decrypt_data(encrypted):
+    fernet = Fernet(get_encryption_hash())
+    decrypted = fernet.decrypt(encrypted)
+    try:
+        decrypted = json.loads(decrypted)
+    except:  # noqa: E722
+        pass
+    return decrypted
+
+
+def create_artifacts(config):
+    config.raise_error = False
     artifacts = config.deserialize()['artifacts']
+    current_hash = get_encryption_hash()
+    if not current_hash:
+        secret_hash = Fernet.generate_key().decode()
+        keyring.set_password("githubsecrets", "secret_hash", secret_hash)
+
     for key, artifact in artifacts.items():
         if not artifact['exists']:
             if artifact['type'] == "file":
-                with open(artifact['path'], 'w') as file:
-                    file.write('')
+                with open(artifact['path'], 'wb') as file:
+                    file.write(encrypt_data(''))
                 click.echo(f"Created file - {artifact['path']}")
             elif artifact['type'] == "dir":
                 mkdir(artifact['path'])
@@ -44,8 +79,9 @@ class Config(object):
     def get_credentials_content():
         config = Config()
         try:
-            with open(config.credentials, 'r') as file:
-                data = json.load(file)
+            with open(config.credentials, 'rb') as file:
+                encrypted = file.read()
+            data = decrypt_data(encrypted)
         except json.decoder.JSONDecodeError:
             data = ''
 
@@ -54,8 +90,9 @@ class Config(object):
     @staticmethod
     def set_credentials_content(credentials_content):
         config = Config()
-        with open(config.credentials, 'w') as file:
-            json.dump(credentials_content, file)
+        encrypted = encrypt_data(credentials_content)
+        with open(config.credentials, 'wb') as file:
+            file.write(encrypted)
         return True
 
     @staticmethod

@@ -17,7 +17,7 @@ Secrets' values and Personal-Access-Tokens are hidden when prompted"""  # noqa: 
 @pass_config
 def init(config):
     """Create a credentials file to store your profiles"""
-    create_artifacts()
+    create_artifacts(config)
 
 
 @cli.command()
