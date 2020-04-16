@@ -2,31 +2,31 @@ name: testing
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Test with bash script
-      env:
-        GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
-      run: |
-        pip install --editable .
-        bash test_functionality.sh
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Test with bash script
+        env:
+          GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
+        run: |
+          pip install --editable .
+          gnome-keyring-daemon --unlock --foreground
+          dbus-run-session -- bash test_functionality.sh
