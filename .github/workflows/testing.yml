@@ -21,12 +21,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          apt remove python3-pip
+          sudo apt remove python3-pip
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install --editable .
+          pip install keyrings.alt
       - name: Test with bash script
         env:
           GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
         run: |
-          pip install --editable .
           bash test_functionality.sh
