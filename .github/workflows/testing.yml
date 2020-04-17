@@ -21,13 +21,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
+          apt remove python3-pip
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install keyrings.alt
       - name: Test with bash script
         env:
           GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
         run: |
           pip install --editable .
-          python -c 'import keyring.backend;from keyrings.alt.file import PlaintextKeyring;keyring.set_keyring(PlaintextKeyring())'
           bash test_functionality.sh
