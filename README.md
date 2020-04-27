@@ -36,21 +36,84 @@ The image runs as a CLI; you must provide arguments, prompts are not available w
 
 Mount your home directory, or any other directory to save the credentials file
 
+**IMPORTANT**: You must create the directory before mounting it, unless it's your home directory. The path must be absolute.
+
 ```bash
-$ docker run -v $HOME:/root unfor19/githubsecrets --help
-Usage: ghs [OPTIONS] COMMAND [ARGS]...
-...
+$ docker run --rm --mount type=bind,source="$HOME",target=/root unfor19/githubsecrets --ci secret-list -p unfor19 -r githubsecrets
+... # Output below
 ```
+
+<details><summary>Output
+</summary>
+
+```json
+[
+  {
+    "base_url": "https://api.github.com/repos/unfor19/githubsecrets",
+    "body": {
+      "secrets": [
+        {
+          "created_at": "2020-04-11T00:01:12Z",
+          "name": "PIP_PASSWORD",
+          "updated_at": "2020-04-11T00:17:39Z"
+        },
+        {
+          "created_at": "2020-04-10T23:21:28Z",
+          "name": "PIP_USERNAME",
+          "updated_at": "2020-04-11T00:17:20Z"
+        },
+        {
+          "created_at": "2020-04-27T20:44:09Z",
+          "name": "testing",
+          "updated_at": "2020-04-27T20:45:43Z"
+        },
+        {
+          "created_at": "2020-04-27T20:22:37Z",
+          "name": "testrepos",
+          "updated_at": "2020-04-27T20:22:37Z"
+        },
+        {
+          "created_at": "2020-04-14T14:14:44Z",
+          "name": "TEST_GITHUB_TOKEN",
+          "updated_at": "2020-04-14T14:14:44Z"
+        }
+      ],
+      "total_count": 5
+    },
+    "repository": "githubsecrets",
+    "status_code": 200
+  }
+]
+```
+
+</details>
 
 #### Windows
 
 Mount your Temp directory, or any other directory to save the credentials file. Make sure you use `/` and not `\`
 
+**IMPORTANT**: You must create the directory before mounting it, unless it's your Temp directory. The path must be absolute.
+
 ```
-$ docker run --rm -v c:/Temp:/root unfor19/githubsecrets --help
-Usage: ghs [OPTIONS] COMMAND [ARGS]...
-...
+$ docker run --rm -v c:/Temp:/root unfor19/githubsecrets --ci secret-delete -p unfor19 -r githubsecrets -s testrepos
+... # Output below
 ```
+
+<details><summary>Output
+</summary>
+
+```json
+[
+  {
+    "base_url": "https://api.github.com/repos/unfor19/githubsecrets",
+    "repository": "githubsecrets",
+    "secret_name": "testrepos",
+    "status_code": 204
+  }
+]
+```
+
+</details>
 
 ### Build from source
 
@@ -106,6 +169,7 @@ $ pip install --editable .
 
    - Secret name
    - Secret value
+
 1. Use it in your [GitHub Actions Workflows](https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions)
    - Snippet
      ```yml
