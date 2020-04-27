@@ -2,7 +2,7 @@
 
 [![testing](https://github.com/unfor19/githubsecrets/workflows/testing/badge.svg)](https://github.com/unfor19/githubsecrets/actions?query=workflow%3Atesting)
 
-![GithubSecrets-Website](https://githubsecrets.s3-eu-west-1.amazonaws.com/githubsecrets-website-gradient.png)
+<img width="100%" alt="GithubSecrets-Website" src="https://githubsecrets.s3-eu-west-1.amazonaws.com/githubsecrets-website-gradient.png" />
 
 Manage your [GitHub Actions](https://github.com/features/actions) secrets, with a simple CLI
 
