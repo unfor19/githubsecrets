@@ -4,6 +4,23 @@ import json
 import click
 from cryptography.fernet import Fernet
 import keyring
+import os
+
+
+def is_docker():
+    path = '/proc/self/cgroup'
+    return (
+        os.path.exists('/.dockerenv') or
+        os.path.isfile(path) and any('docker' in line for line in open(path))
+    )
+
+
+def print_pretty_json(res):
+    click.echo(json.dumps(res, indent=4, sort_keys=True))
+
+
+def list_by_comma(my_string):
+    return [item.strip() for item in my_string.split(",")]
 
 
 def error_exit(msg):
