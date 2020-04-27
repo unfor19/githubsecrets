@@ -6,6 +6,10 @@ from cryptography.fernet import Fernet
 import keyring
 
 
+def print_pretty_json(res):
+    click.echo(json.dumps(res, indent=4, sort_keys=True))
+
+
 def list_by_comma(my_string):
     return [item.strip() for item in my_string.split(",")]
 

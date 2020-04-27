@@ -36,8 +36,7 @@ Create it by executing:\nghs profile-apply -p {self.profile.name}
         encrypted = sealed_box.encrypt(secret_value.encode("utf-8"))
         return b64encode(encrypted).decode("utf-8")
 
-    @staticmethod
-    def print_response(response):
+    def json_response(self, response):
         """Prints a human-readable response"""
         res = {}
         if (response.text):
@@ -46,7 +45,11 @@ Create it by executing:\nghs profile-apply -p {self.profile.name}
             except:  # noqa: E722
                 res['body'] = response.text
         res['status_code'] = response.status_code
-        click.echo(json.dumps(res, indent=4, sort_keys=True))
+        res['repository'] = self.repository
+        res['base_url'] = self.base_url
+        if self.name:
+            res['secret_name'] = self.name
+        return res
 
     def request(self, method, api_path, parameters={}) -> requests.request:
         full_url = f"{self.base_url}/{api_path}"
@@ -90,7 +93,7 @@ Create it by executing:\nghs profile-apply -p {self.profile.name}
                 parameters=parameters
             )
 
-            Secret.print_response(response)
+            return self.json_response(response)
 
         else:
             click.echo(f"FAILED: Unable to fetch profile {self.profile_name}")
@@ -98,7 +101,7 @@ Create it by executing:\nghs profile-apply -p {self.profile.name}
     def lista(self):
         """Lists all secrets in repository"""
         response = self.request('get', "actions/secrets")
-        Secret.print_response(response)
+        return self.json_response(response)
 
     def delete(self):
         """Delete a secret"""
@@ -110,9 +113,9 @@ Create it by executing:\nghs profile-apply -p {self.profile.name}
 
         if confirm:
             response = self.request('delete', f"actions/secrets/{self.name}")
-            Secret.print_response(response)
+            return self.json_response(response)
 
     def get(self):
         """Get a secret"""
         response = self.request('get', f"actions/secrets/{self.name}")
-        Secret.print_response(response)
+        return self.json_response(response)

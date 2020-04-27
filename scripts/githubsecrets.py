@@ -1,5 +1,5 @@
 import click
-from .config import pass_config, pass_validate, create_artifacts, list_by_comma
+from .config import pass_config, pass_validate, create_artifacts, list_by_comma, print_pretty_json
 from .profile import Profile
 from .secret import Secret
 
@@ -83,9 +83,12 @@ def secret_apply(
 Example: ghs secret-apply -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
+    responses = []
     for repo in repositories:
         secret = Secret(config, profile, repo, secret_name, secret_value)
         secret.apply()
+        responses.append(secret.apply())
+    print_pretty_json(responses)
 
 
 @cli.command()
@@ -102,9 +105,11 @@ def secret_delete(
 Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
+    responses = []
     for repo in repositories:
         secret = Secret(config, profile, repo, secret_name)
-        secret.delete()
+        responses.append(secret.delete())
+    print_pretty_json(responses)
 
 
 @cli.command()
@@ -121,9 +126,11 @@ def secret_get(
 Example: ghs secret-get -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
+    responses = []
     for repo in repositories:
         secret = Secret(config, profile, repo, secret_name)
-        secret.get()
+        responses.append(secret.get())
+    print_pretty_json(responses)
 
 
 @cli.command()
@@ -139,6 +146,8 @@ def secret_list(
 Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
+    responses = []
     for repo in repositories:
         secret = Secret(config, profile, repo)
-        secret.lista()
+        responses.append(secret.lista())
+    print_pretty_json(responses)
