@@ -1,12 +1,12 @@
 import click
-from .config import pass_config, pass_validate, create_artifacts
+from .config import pass_config, pass_validate, create_artifacts, list_by_comma
 from .profile import Profile
 from .secret import Secret
 
 
 @click.group()
 @pass_config
-@click.option('--ci', is_flag=True, help="Use this flag to avoid deletion confirmation prompts")  # noqa: E501
+@click.option('--ci', '-ci', is_flag=True, help="Use this flag to avoid deletion confirmation prompts")  # noqa: E501
 def cli(config, ci):
     """All commands can run without providing options, and then you'll be prompted to insert values.\n
 Secrets' values and Personal-Access-Tokens are hidden when prompted"""  # noqa: E501
@@ -73,10 +73,13 @@ def secret_apply(
     config, validate,
     repository, profile_name, secret_name, secret_value
 ):
-    """Create or modify a secret in a GitHub repository"""
+    """Apply to multiple repositories providing a string delimited by commas ","\n
+Example: ghs secret-apply -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
-    secret = Secret(config, profile, repository, secret_name, secret_value)
-    secret.apply()
+    repositories = list_by_comma(repository)
+    for repo in repositories:
+        secret = Secret(config, profile, repo, secret_name, secret_value)
+        secret.apply()
 
 
 @cli.command()
@@ -89,10 +92,13 @@ def secret_delete(
     config, validate,
     repository, profile_name, secret_name
 ):
-    """Delete a secret in a GitHub repository"""
+    """Delete secrets from multiple repositories providing a string delimited by commas ","\n
+Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
-    secret = Secret(config, profile, repository, secret_name)
-    secret.delete()
+    repositories = list_by_comma(repository)
+    for repo in repositories:
+        secret = Secret(config, profile, repo, secret_name)
+        secret.delete()
 
 
 @cli.command()
@@ -105,10 +111,13 @@ def secret_get(
     config, validate,
     repository, profile_name, secret_name
 ):
-    """Get a secret from a GitHub repository"""
+    """Get secrets from multiple repositories providing a string delimited by commas ","\n
+Example: ghs secret-get -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
-    secret = Secret(config, profile, repository, secret_name)
-    secret.get()
+    repositories = list_by_comma(repository)
+    for repo in repositories:
+        secret = Secret(config, profile, repo, secret_name)
+        secret.get()
 
 
 @cli.command()
@@ -120,7 +129,10 @@ def secret_list(
     config, validate,
     repository, profile_name
 ):
-    """List all secret in a GitHub repository"""
+    """List secrets of multiple repositories providing a string delimited by commas ","\n
+Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
-    secret = Secret(config, profile, repository)
-    secret.lista()
+    repositories = list_by_comma(repository)
+    for repo in repositories:
+        secret = Secret(config, profile, repo)
+        secret.lista()

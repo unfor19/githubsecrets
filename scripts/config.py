@@ -6,6 +6,10 @@ from cryptography.fernet import Fernet
 import keyring
 
 
+def list_by_comma(my_string):
+    return [item.strip() for item in my_string.split(",")]
+
+
 def error_exit(msg):
     click.echo(msg)
     exit()
