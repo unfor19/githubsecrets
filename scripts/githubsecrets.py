@@ -33,9 +33,12 @@ def profile_apply(
     config, validate,
     profile_name, github_owner, personal_access_token
 ):
-    """Create or modify a profile"""
+    """Create or modify multiple profiles providing a string delimited by commas ","\n
+Example: ghs profile-apply -p 'willy, oompa'"""
     profile = Profile(config, profile_name)
-    profile.apply(github_owner, personal_access_token)
+    profiles = list_by_comma(profile_name)
+    for prof in profiles:
+        profile.apply(github_owner, personal_access_token)
 
 
 @cli.command()
@@ -46,9 +49,12 @@ def profile_delete(
     config, validate,
     profile_name
 ):
-    """Delete a profile"""
-    profile = Profile(config, profile_name)
-    profile.delete()
+    """Delete multiple profiles providing a string delimited by commas ","\n
+Example: ghs profile-delete -p 'willy, oompa'"""
+    profile_names = list_by_comma(profile_name)
+    for prof_name in profile_names:
+        profile = Profile(config, prof_name)
+        profile.delete()
 
 
 @cli.command()
