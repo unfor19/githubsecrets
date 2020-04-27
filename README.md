@@ -39,7 +39,7 @@ Mount your home directory, or any other directory to save the credentials file
 **IMPORTANT**: You must create the directory before mounting it, unless it's your home directory. The path must be absolute.
 
 ```bash
-$ docker run --rm --mount type=bind,source="$HOME",target=/root unfor19/githubsecrets --ci secret-list -p unfor19 -r githubsecrets
+$ docker run --rm --mount type=bind,source="$HOME",target=/root unfor19/githubsecrets secret-list -p unfor19 -r githubsecrets
 ... # Output below
 ```
 
@@ -95,7 +95,7 @@ Mount your Temp directory, or any other directory to save the credentials file. 
 **IMPORTANT**: You must create the directory before mounting it, unless it's your Temp directory. The path must be absolute.
 
 ```
-$ docker run --rm -v c:/Temp:/root unfor19/githubsecrets --ci secret-delete -p unfor19 -r githubsecrets -s testrepos
+$ docker run --rm --mount type=bind,source=c:/Temp,target=/root unfor19/githubsecrets secret-delete -p unfor19 -r githubsecrets -s testrepos
 ... # Output below
 ```
 
