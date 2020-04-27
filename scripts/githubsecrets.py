@@ -1,5 +1,5 @@
 import click
-from .config import pass_config, pass_validate, create_artifacts, list_by_comma, print_pretty_json
+from .config import pass_config, pass_validate, create_artifacts, list_by_comma, print_pretty_json, is_docker
 from .profile import Profile
 from .secret import Secret
 
@@ -10,6 +10,8 @@ from .secret import Secret
 def cli(config, ci):
     """All commands can run without providing options, and then you'll be prompted to insert values.\n
 Secrets' values and Personal-Access-Tokens are hidden when prompted"""  # noqa: E501
+    if is_docker():
+        ci = True
     config.ci = ci  # noqa: F821
 
 

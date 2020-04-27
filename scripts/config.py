@@ -4,6 +4,15 @@ import json
 import click
 from cryptography.fernet import Fernet
 import keyring
+import os
+
+
+def is_docker():
+    path = '/proc/self/cgroup'
+    return (
+        os.path.exists('/.dockerenv') or
+        os.path.isfile(path) and any('docker' in line for line in open(path))
+    )
 
 
 def print_pretty_json(res):
