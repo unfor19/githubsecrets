@@ -28,6 +28,9 @@ $ pip install githubsecrets
 
 ### Docker
 
+<details><summary>Expand/Collapse
+ </summary>
+
 Mount local directory to `root`, the image is available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
 
 The image runs as a CLI; you must provide arguments, prompts are not available while running in Docker
@@ -112,6 +115,8 @@ $ docker run --rm --mount type=bind,source=c:/Temp,target=/root unfor19/githubse
   }
 ]
 ```
+
+</details>
 
 </details>
 
