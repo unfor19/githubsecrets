@@ -53,16 +53,18 @@ while [ "$1" != "" ]; do
 done
 
 [[ -z $TEST_GITHUB_TOKEN ]] && error "GitHub Token is missing"
-unameOut="$(uname -s)"
-case "${unameOut}" in
-    Linux*)     MACHINE=Linux;;
-    Darwin*)    MACHINE=Mac;;
-    CYGWIN*)    MACHINE=Cygwin;;
-    MINGW*)     MACHINE=MinGw;;
-    *)          MACHINE="UNKNOWN:${unameOut}"
+case "$OSTYPE" in
+  linux*)   OS_NAME="Linux" ;;
+  darwin*)  OS_NAME="MacOS" ;; 
+  win*)     OS_NAME="Windows" ;;
+  msys*)    OS_NAME="MinGW" ;;
+  cygwin*)  OS_NAME="Cygwin" ;;
+  bsd*)     OS_NAME="BSD" ;;
+  solaris*) OS_NAME="Solaris" ;;
+  *)        OS_NAME="unknown: $OSTYPE" ;;
 esac
 
-SECRET_NAME="TEST_${MACHINE}_${PYTHON_VERSION}"
+SECRET_NAME="TEST_${OS_NAME}_${PYTHON_VERSION}"
 
 echo ">> INIT"
 ghs --ci init
