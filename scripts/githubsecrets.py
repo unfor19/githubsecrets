@@ -37,9 +37,9 @@ def profile_apply(
 ):
     """Create or modify multiple profiles providing a string delimited by commas ","\n
 Example: ghs profile-apply -p 'willy, oompa'"""
-    profile = Profile(config, profile_name)
-    profiles = list_by_comma(profile_name)
-    for prof in profiles:
+    profile_names = list_by_comma(profile_name)
+    for prof_name in profile_names:
+        profile = Profile(config, prof_name)
         profile.apply(github_owner, personal_access_token)
 
 
