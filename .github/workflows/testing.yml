@@ -27,6 +27,6 @@ jobs:
           pip install keyrings.alt
       - name: Test with bash script
         env:
-          GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
+          TEST_GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
         run: |
-          bash test_functionality.sh
+          bash test_functionality.sh -t $TEST_GITHUB_TOKEN
