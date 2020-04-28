@@ -224,21 +224,26 @@ Pull requests are welcome! Ideally, create a feature branch and issue for every 
 
 1. Fork this repo
 1. Create your feature branch from master (`git checkout -b my-new-feature`)
-1. Build from source and start coding!
+1. Install from source
    ```bash
-    $ git clone https://github.com/unfor19/githubsecrets.git && cd githubsecrets
+    $ git clone https://github.com/${GITHUB_OWNER}/githubsecrets.git && cd githubsecrets
     ...
     $ pip install --upgrade pip
     ...
     $ python -m venv ./ENV
-    ...
     $ . ./ENV/bin/activate
     ...
     $ (ENV) pip install --editable .
     ...
     # Done! Now when you run 'ghs' it will get automatically updated when you modify the code
    ```
-1. Commit your remarkable changes (`git commit -am 'Added some feature'`)
+1. Add the code of your new feature
+1. Test - generate a Personal Access Token for testing
+   ```bash
+   $ (ENV) bash test_functionality.sh -p PROFILE_NAME -o GITHUB_OWNER -t TEST_GITHUB_TOKEN -r GITHUB_REPOSITORY`
+   ... # All good? Move on to the next step
+   ```
+1. Commit your remarkable changes (`git commit -am 'Added new feature'`)
 1. Push to the branch (`git push --set-up-stream origin my-new-feature`)
 1. Create a new Pull Request and tell us about your changes
 
