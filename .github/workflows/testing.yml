@@ -75,4 +75,4 @@ jobs:
         env:
           TEST_GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
         run: |
-          bash test_functionality.sh -t $TEST_GITHUB_TOKEN
+          bash test_functionality.sh -t %TEST_GITHUB_TOKEN%
