@@ -53,6 +53,16 @@ while [ "$1" != "" ]; do
 done
 
 [[ -z $TEST_GITHUB_TOKEN ]] && error "GitHub Token is missing"
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     MACHINE=Linux;;
+    Darwin*)    MACHINE=Mac;;
+    CYGWIN*)    MACHINE=Cygwin;;
+    MINGW*)     MACHINE=MinGw;;
+    *)          MACHINE="UNKNOWN:${unameOut}"
+esac
+
+SECRET_NAME="TEST_${MACHINE}_${PYTHON_VERSION}"
 
 echo ">> INIT"
 ghs --ci init
@@ -62,13 +72,13 @@ echo ">> Add profile"
 ghs --ci profile-apply -p $PROFILE_NAME -o $GITHUB_OWNER -t $TEST_GITHUB_TOKEN
 echo ">> List profiles - Should see $PROFILE_NAME"
 ghs --ci profile-list
-echo ">> Add secret - TEST_${PYTHON_VERSION}"
-ghs --ci secret-apply  -p $PROFILE_NAME -r $GITHUB_REPOSITORY -s "TEST_${PYTHON_VERSION}" -v oompaloompa
+echo ">> Add secret - $SECRET_NAME"
+ghs --ci secret-apply  -p $PROFILE_NAME -r $GITHUB_REPOSITORY -s $SECRET_NAME -v oompaloompa
 echo ">> List secrets"
 ghs --ci secret-list   -p $PROFILE_NAME -r $GITHUB_REPOSITORY
-echo ">> Get secret - TEST_${PYTHON_VERSION}"
-ghs --ci secret-get    -p $PROFILE_NAME -r $GITHUB_REPOSITORY -s "TEST_${PYTHON_VERSION}"
-echo ">> Delete secret - TEST_${PYTHON_VERSION}"
-ghs --ci secret-delete -p $PROFILE_NAME -r $GITHUB_REPOSITORY -s "TEST_${PYTHON_VERSION}"
+echo ">> Get secret - $SECRET_NAME"
+ghs --ci secret-get    -p $PROFILE_NAME -r $GITHUB_REPOSITORY -s $SECRET_NAME
+echo ">> Delete secret - $SECRET_NAME"
+ghs --ci secret-delete -p $PROFILE_NAME -r $GITHUB_REPOSITORY -s $SECRET_NAME
 echo ">> Delete profile - $PROFILE_NAME"
 ghs --ci profile-delete -p $PROFILE_NAME
