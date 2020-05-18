@@ -1,6 +1,6 @@
 # githubsecrets
 
-[![testing](https://github.com/unfor19/githubsecrets/workflows/testing/badge.svg)](https://github.com/unfor19/githubsecrets/actions?query=workflow%3Atesting)
+[![testing](https://github.com/unfor19/githubsecrets/workflows/testing/badge.svg)](https://github.com/unfor19/githubsecrets/actions?query=workflow%3Atesting) [![Known Vulnerabilities](https://snyk.io/test/github/unfor19/githubsecrets/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/unfor19/githubsecrets?targetFile=requirements.txt)
 
 <img width="100%" alt="GithubSecrets-Website" src="https://githubsecrets.s3-eu-west-1.amazonaws.com/githubsecrets-website-gradient.png" />
 
