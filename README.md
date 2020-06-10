@@ -1,6 +1,6 @@
 # githubsecrets
 
-[![testing](https://github.com/unfor19/githubsecrets/workflows/testing/badge.svg)](https://github.com/unfor19/githubsecrets/actions?query=workflow%3Atesting) [![Known Vulnerabilities](https://snyk.io/test/github/unfor19/githubsecrets/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/unfor19/githubsecrets?targetFile=requirements.txt)
+[![testing](https://github.com/unfor19/githubsecrets/workflows/testing/badge.svg)](https://github.com/unfor19/githubsecrets/actions?query=workflow%3Atesting)
 
 <img width="100%" alt="GithubSecrets-Website" src="https://githubsecrets.s3-eu-west-1.amazonaws.com/githubsecrets-website-gradient.png" />
 
@@ -31,9 +31,9 @@ $ pip install githubsecrets
 <details><summary>Expand/Collapse
  </summary>
 
-Mount local directory to `root`, the image is available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
+Mount a local directory to `root`, the image is available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
 
-The image runs as a CLI; you must provide arguments, prompts are not available while running in Docker
+The image runs as a CLI; you must provide arguments, since prompts are not available while running in a Docker container
 
 #### Linux and macOS
 
@@ -124,7 +124,7 @@ $ docker run --rm --mount type=bind,source=c:/Temp,target=/root unfor19/githubse
 
 **Note**: When using Docker, no need to add `ghs`; supply only a command and its arguments
 
-1. Initialize this application - Creates a credential file at `~/.githubsecrets/credentials`
+1. Initialize this application - Creates a credentials file at `~/.githubsecrets/credentials`
 
    ```bash
    $ ghs init
@@ -150,10 +150,10 @@ $ docker run --rm --mount type=bind,source=c:/Temp,target=/root unfor19/githubse
    - Github owner - which is your GitHub Organization or GitHub Account name (not email address)
    - Personal access token - that you've created in the previous steps
 
-1. Create a GitHub secret
+1. Create a GitHub secret, use the `-r` flag and supply the repository's name. You can apply the same secret to multiple repositories at once, for example: `-r "githubsecrets, aws-build-badges"`
 
    ```bash
-   ghs secret-apply -p willy_wonka -r github-secrets
+   ghs secret-apply -p willy_wonka -r githubsecrets
    ```
 
    You'll be prompted to insert:
@@ -218,7 +218,7 @@ Commands:
 
 ## Contributing
 
-Report issues/questions/feature requests on in the [Issues](https://github.com/unfor19/githubsecrets/issues) section.
+Report issues/questions/feature requests on the [Issues](https://github.com/unfor19/githubsecrets/issues) section.
 
 Pull requests are welcome! Ideally, create a feature branch and issue for every single change you make. These are the steps:
 
