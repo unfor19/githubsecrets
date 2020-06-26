@@ -4,9 +4,36 @@ from .profile import Profile
 from .secret import Secret
 
 
-@click.group()
-@pass_config
-@click.option('--ci', '-ci', is_flag=True, help="Use this flag to avoid deletion confirmation prompts")  # noqa: E501
+class AliasedGroup(click.Group):
+    def get_command(self, ctx, cmd_name):
+        aliases = {
+            "p": "profile",
+            "s": "secret",
+            "a": "apply",
+            "g": "get",
+            "d": "delete",
+            "l": "list",
+        }
+        if len(cmd_name) == 2:
+            words = [aliases[char] for char in cmd_name if char in aliases]
+            cmd_name = "-".join(words)
+
+        rv = click.Group.get_command(self, ctx, cmd_name)
+        if rv is not None:
+            return rv
+        matches = [x for x in self.list_commands(ctx)
+                   if x.startswith(cmd_name)]
+        if not matches:
+            return None
+        elif len(matches) == 1:
+            return click.Group.get_command(self, ctx, matches[0])
+        ctx.fail(f"Too many matches: {', '.join(sorted(matches))}")
+
+
+# @click.group()
+@ click.command(cls=AliasedGroup)
+@ pass_config
+@ click.option('--ci', '-ci', is_flag=True, help="Use this flag to avoid deletion confirmation prompts")  # noqa: E501
 def cli(config, ci):
     """All commands can run without providing options, and then you'll be prompted to insert values.\n
 Secrets' values and Personal-Access-Tokens are hidden when prompted"""  # noqa: E501
@@ -15,27 +42,29 @@ Secrets' values and Personal-Access-Tokens are hidden when prompted"""  # noqa: 
     config.ci = ci  # noqa: F821
 
 
-@cli.command()
-@pass_config
+@ cli.command()
+@ pass_config
 def init(config):
     """Create a credentials file to store your profiles"""
     create_artifacts(config)
 
 
-@cli.command()
-@pass_validate
-@pass_config
-@click.option('--profile-name', '-p', prompt=True)
-@click.option('--github-owner', '-o', prompt=True)
-@click.option(
+@ cli.command()
+@ pass_validate
+@ pass_config
+@ click.option('--profile-name', '-p', prompt=True)
+@ click.option('--github-owner', '-o', prompt=True)
+@ click.option(
     '--personal-access-token', '-t', prompt=True,
     hide_input=True, confirmation_prompt=True
+
+
 )
 def profile_apply(
     config, validate,
     profile_name, github_owner, personal_access_token
 ):
-    """Create or modify multiple profiles providing a string delimited by commas ","\n
+    """[pa] Create or modify multiple profiles providing a string delimited by commas ","\n
 Example: ghs profile-apply -p 'willy, oompa'"""
     profile_names = list_by_comma(profile_name)
     for prof_name in profile_names:
@@ -43,15 +72,15 @@ Example: ghs profile-apply -p 'willy, oompa'"""
         profile.apply(github_owner, personal_access_token)
 
 
-@cli.command()
-@pass_validate
-@pass_config
-@click.option('--profile-name', '-p', prompt=True)
+@ cli.command()
+@ pass_validate
+@ pass_config
+@ click.option('--profile-name', '-p', prompt=True)
 def profile_delete(
     config, validate,
     profile_name
 ):
-    """Delete multiple profiles providing a string delimited by commas ","\n
+    """[pd] Delete multiple profiles providing a string delimited by commas ","\n
 Example: ghs profile-delete -p 'willy, oompa'"""
     profile_names = list_by_comma(profile_name)
     for prof_name in profile_names:
@@ -59,21 +88,21 @@ Example: ghs profile-delete -p 'willy, oompa'"""
         profile.delete()
 
 
-@cli.command()
-@pass_validate
-@pass_config
+@ cli.command()
+@ pass_validate
+@ pass_config
 def profile_list(config, validate):
-    """List all profile - truncates personal access tokens"""
+    """[pl] List all profile - truncates personal access tokens"""
     Profile.lista()
 
 
-@cli.command()
-@pass_validate
-@pass_config
-@click.option('--repository', '-r', prompt=True)
-@click.option('--profile-name', '-p', prompt=True)
-@click.option('--secret-name', '-s', prompt=True)
-@click.option(
+@ cli.command()
+@ pass_validate
+@ pass_config
+@ click.option('--repository', '-r', prompt=True)
+@ click.option('--profile-name', '-p', prompt=True)
+@ click.option('--secret-name', '-s', prompt=True)
+@ click.option(
     '--secret-value', '-v', prompt=True,
     hide_input=True, confirmation_prompt=True
 )
@@ -81,7 +110,7 @@ def secret_apply(
     config, validate,
     repository, profile_name, secret_name, secret_value
 ):
-    """Apply to multiple repositories providing a string delimited by commas ","\n
+    """[sa] Apply to multiple repositories providing a string delimited by commas ","\n
 Example: ghs secret-apply -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
@@ -93,17 +122,17 @@ Example: ghs secret-apply -p willy -r 'githubsecrets, serverless-template'"""
     print_pretty_json(responses)
 
 
-@cli.command()
-@pass_validate
-@pass_config
-@click.option('--repository', '-r', prompt=True)
-@click.option('--profile-name', '-p', prompt=True)
-@click.option('--secret-name', '-s', prompt=True)
+@ cli.command()
+@ pass_validate
+@ pass_config
+@ click.option('--repository', '-r', prompt=True)
+@ click.option('--profile-name', '-p', prompt=True)
+@ click.option('--secret-name', '-s', prompt=True)
 def secret_delete(
     config, validate,
     repository, profile_name, secret_name
 ):
-    """Delete secrets from multiple repositories providing a string delimited by commas ","\n
+    """[sd] Delete secrets from multiple repositories providing a string delimited by commas ","\n
 Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
@@ -114,17 +143,17 @@ Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""
     print_pretty_json(responses)
 
 
-@cli.command()
-@pass_validate
-@pass_config
-@click.option('--repository', '-r', prompt=True)
-@click.option('--profile-name', '-p', prompt=True)
-@click.option('--secret-name', '-s', prompt=True)
+@ cli.command()
+@ pass_validate
+@ pass_config
+@ click.option('--repository', '-r', prompt=True)
+@ click.option('--profile-name', '-p', prompt=True)
+@ click.option('--secret-name', '-s', prompt=True)
 def secret_get(
     config, validate,
     repository, profile_name, secret_name
 ):
-    """Get secrets from multiple repositories providing a string delimited by commas ","\n
+    """[sg] Get secrets from multiple repositories providing a string delimited by commas ","\n
 Example: ghs secret-get -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
@@ -135,16 +164,16 @@ Example: ghs secret-get -p willy -r 'githubsecrets, serverless-template'"""
     print_pretty_json(responses)
 
 
-@cli.command()
-@pass_validate
-@pass_config
-@click.option('--repository', '-r', prompt=True)
-@click.option('--profile-name', '-p', prompt=True)
+@ cli.command()
+@ pass_validate
+@ pass_config
+@ click.option('--repository', '-r', prompt=True)
+@ click.option('--profile-name', '-p', prompt=True)
 def secret_list(
     config, validate,
     repository, profile_name
 ):
-    """List secrets of multiple repositories providing a string delimited by commas ","\n
+    """[sl] List secrets of multiple repositories providing a string delimited by commas ","\n
 Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
