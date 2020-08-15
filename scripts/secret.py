@@ -96,7 +96,7 @@ Create it by executing:\nghs profile-apply -p {self.profile.name}
             return self.json_response(response)
 
         else:
-            click.echo(f"FAILED: Unable to fetch profile {self.profile_name}")
+            click.echo(f"FAILED: Unable to fetch profile {self.profile.name}")
 
     def lista(self):
         """Lists all secrets in repository"""
