@@ -38,7 +38,7 @@ Mount a local directory to `root`, the image is available at [DockerHub](https:/
 Mount your home directory, or any other directory to save the credentials file
 
 ```bash
-$ docker run --rm -v "${HOME}/:/root" unfor19/githubsecrets secret-list -p unfor19 -r githubsecrets
+$ docker run --rm -it -v "${HOME}/:/root" unfor19/githubsecrets secret-list -p unfor19 -r githubsecrets
 ... # Output below
 ```
 
@@ -92,7 +92,7 @@ $ docker run --rm -v "${HOME}/:/root" unfor19/githubsecrets secret-list -p unfor
 Mount your Temp directory, or any other directory to save the credentials file. Make sure you use `/` and not `\`
 
 ```
-$ docker run --rm -v c:/Temp:/root unfor19/githubsecrets secret-delete -p unfor19 -r githubsecrets -s testrepos
+$ docker run --rm -it -v c:/Temp:/root unfor19/githubsecrets secret-delete -p unfor19 -r githubsecrets -s testrepos
 ... # Output below
 ```
 
