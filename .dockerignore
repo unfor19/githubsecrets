@@ -7,3 +7,4 @@
 !./version
 !./requirements.txt
 !./scripts/
+!./entrypoint.sh
