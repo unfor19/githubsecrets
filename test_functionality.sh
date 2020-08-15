@@ -19,11 +19,10 @@ EOF
 }
 
 PYTHON_VERSION=$(python -c 'import platform; print(platform.python_version())')
-PYTHON_VERSION=$(echo $PYTHON_VERSION | sed "s|\.||g")
+PYTHON_VERSION=${PYTHON_VERSION//./}
 PROFILE_NAME=willy
 GITHUB_OWNER=unfor19
 GITHUB_REPOSITORY=githubsecrets
-GITHUB_TOKEN=
 
 while [ "$1" != "" ]; do
     case $1 in
