@@ -26,6 +26,15 @@ Install with pip on your machine; the package is available at [PyPi](https://pyp
 $ pip install githubsecrets
 ```
 
+### Ubuntu and Debian
+
+This project uses the [keyring](https://pypi.org/project/keyring/) package, in some versions of Ubuntu and Debian, you might need to install the following packages
+
+```
+$ sudo apt-get update && sudo apt-get install -y libdbus-glib-1-dev
+$ pip install secretstorage dbus-python keyring
+```
+
 ### Docker
 
 <details><summary>Expand/Collapse
