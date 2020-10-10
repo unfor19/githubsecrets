@@ -29,7 +29,7 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        ghs=githubsecrets.cli:cli
+        ghs=githubsecrets.ghs:cli
     ''',
     setup_requires=[
         'setuptools>=44.1.0',

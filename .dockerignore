@@ -1,7 +1,6 @@
 **
 !./test_functionality.sh
 !./setup.*
-!./__main__.py
 !./README.md
 !./LICENSE
 !./version
