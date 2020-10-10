@@ -1,4 +1,4 @@
-from scripts import githubsecrets
+from githubsecrets import cli
 
 if __name__ == '__main__':
-    githubsecrets.cli()
+    cli.cli()
