@@ -6,5 +6,5 @@
 !./LICENSE
 !./version
 !./requirements.txt
-!./scripts/
+!./githubsecrets/
 !./entrypoint.sh

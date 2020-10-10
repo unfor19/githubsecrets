@@ -1,6 +1,5 @@
 import click
 import requests
-import json
 from base64 import b64encode
 from nacl import encoding, public
 from .config import error_exit

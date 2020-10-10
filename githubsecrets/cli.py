@@ -1,5 +1,6 @@
 import click
-from .config import pass_config, pass_validate, create_artifacts, list_by_comma, print_pretty_json, is_docker
+from .config import pass_config, pass_validate, create_artifacts, \
+    list_by_comma, print_pretty_json, is_docker
 from .profile import Profile
 from .secret import Secret
 
@@ -65,7 +66,7 @@ def profile_apply(
     profile_name, github_owner, personal_access_token
 ):
     """[pa] Create or modify multiple profiles providing a string delimited by commas ","\n
-Example: ghs profile-apply -p 'willy, oompa'"""
+Example: ghs profile-apply -p 'willy, oompa'"""  # noqa: 501
     profile_names = list_by_comma(profile_name)
     for prof_name in profile_names:
         profile = Profile(config, prof_name)
@@ -111,7 +112,7 @@ def secret_apply(
     repository, profile_name, secret_name, secret_value
 ):
     """[sa] Apply to multiple repositories providing a string delimited by commas ","\n
-Example: ghs secret-apply -p willy -r 'githubsecrets, serverless-template'"""
+Example: ghs secret-apply -p willy -r 'githubsecrets, serverless-template'"""  # noqa: 501
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
     responses = []
@@ -133,7 +134,7 @@ def secret_delete(
     repository, profile_name, secret_name
 ):
     """[sd] Delete secrets from multiple repositories providing a string delimited by commas ","\n
-Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""
+Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""  # noqa: 501
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
     responses = []
@@ -154,7 +155,7 @@ def secret_get(
     repository, profile_name, secret_name
 ):
     """[sg] Get secrets from multiple repositories providing a string delimited by commas ","\n
-Example: ghs secret-get -p willy -r 'githubsecrets, serverless-template'"""
+Example: ghs secret-get -p willy -r 'githubsecrets, serverless-template'"""  # noqa: 501
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
     responses = []
@@ -174,7 +175,7 @@ def secret_list(
     repository, profile_name
 ):
     """[sl] List secrets of multiple repositories providing a string delimited by commas ","\n
-Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""
+Example: ghs secret-delete -p willy -r 'githubsecrets, serverless-template'"""  # noqa: 501
     profile = Profile(config, profile_name)
     repositories = list_by_comma(repository)
     responses = []

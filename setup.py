@@ -29,7 +29,7 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        ghs=scripts.githubsecrets:cli
+        ghs=githubsecrets.cli:cli
     ''',
     setup_requires=[
         'setuptools>=44.1.0',
@@ -38,12 +38,12 @@ setup(
         'docutils>=0.16'
     ],
     classifiers=[
-    'Development Status :: 5 - Production/Stable',
-    'Intended Audience :: Developers',
-    'Topic :: Software Development :: Build Tools',
-    'License :: OSI Approved :: MIT License',
-    'Programming Language :: Python :: 3.6',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8'
-  ],
+        'Development Status :: 5 - Production/Stable',
+        'Intended Audience :: Developers',
+        'Topic :: Software Development :: Build Tools',
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8'
+    ],
 )

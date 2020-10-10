@@ -19,7 +19,7 @@ class Profile():
         msg = "\n"
         if not credentials_content:
             error_exit(
-                f"WARNING: Couldn't find any profile, create one by executing:\nghs profile-apply -p profile_name\n")  # noqa: E501
+                "WARNING: Couldn't find any profile, create one by executing:\nghs profile-apply -p profile_name\n")  # noqa: E501
         for key, value in credentials_content.items():
             token_length = len(value['personal_access_token'])
             value['personal_access_token'] = \
