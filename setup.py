@@ -28,9 +28,9 @@ setup(
         'keyring>=21.2.0'
     ],
     entry_points='''
-        [console_scripts]
-        ghs=githubsecrets.cli:cli
-    ''',
+[console_scripts]
+ghs=githubsecrets.ghs:cli
+''',
     setup_requires=[
         'setuptools>=44.1.0',
         'wheel>=0.34.2',

@@ -1,4 +1,4 @@
-from githubsecrets import cli
+from githubsecrets import ghs
 
 if __name__ == '__main__':
-    cli.cli()
+    ghs.cli()
