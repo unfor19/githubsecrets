@@ -26,14 +26,15 @@ Install with pip on your machine; the package is available at [PyPi](https://pyp
 $ pip install githubsecrets
 ```
 
-### Ubuntu and Debian
+### From source
 
-This project uses the [keyring](https://pypi.org/project/keyring/) package, in some versions of Ubuntu and Debian, you might need to install the following packages
+Python v3.6.7 and above
 
-```
-$ sudo apt-get update && sudo apt-get install -y libdbus-glib-1-dev
-$ pip install secretstorage dbus-python keyring
-```
+1. Clone this repository
+1. Run the `githubsecrets` module (directory)
+   ```
+   python -m githubsecrets --help
+   ```
 
 ### Docker
 
@@ -217,6 +218,17 @@ Commands:
   secret-delete   Delete secrets from multiple repositories providing a...
   secret-get      Get secrets from multiple repositories providing a string...
   secret-list     List secrets of multiple repositories providing a string...
+```
+
+## Troubleshooting
+
+### Ubuntu and Debian
+
+This project uses the [keyring](https://pypi.org/project/keyring/) package, in some versions of Ubuntu and Debian, you might need to install the following packages
+
+```
+$ sudo apt-get update && sudo apt-get install -y libdbus-glib-1-dev
+$ pip install secretstorage dbus-python keyring
 ```
 
 ## Contributing
