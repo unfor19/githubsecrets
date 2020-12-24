@@ -134,7 +134,7 @@ $ docker run --rm -it -v c:/Temp:/root unfor19/githubsecrets secret-delete -p un
    $ ghs init
    ```
 
-1. [Generate a GitHub Personal-Access-Token](https://github.com/settings/tokens) with the following permssions:
+1. [Generate a GitHub Personal-Access-Token](https://github.com/settings/tokens) with the following permissions:
 
    - repo (all)
    - admin:public_key > read:public_key
