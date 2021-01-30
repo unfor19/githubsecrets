@@ -1,4 +1,7 @@
 #!/bin/bash
+set -e
+set -o pipefail
+
 error (){
     local msg=$1
     echo -e "\033[31mFATA[0000]\e[0m ${msg}"
@@ -9,7 +12,7 @@ error (){
 usage()
 {
   cat << EOF
-usage: bash ./test_functionality.sh -p PROFILE_NAME -o GITHUB_OWNER -t TEST_GITHUB_TOKEN -r GITHUB_REPOSITORY
+usage: bash scripts/test_functionality.sh -p PROFILE_NAME -o GITHUB_OWNER -t TEST_GITHUB_TOKEN -r GITHUB_REPOSITORY
 -p    | --PROFILE_NAME       (Required)    willy
 -o    | --GITHUB_OWNER       (Required)    unfor19
 -t    | --TEST_GITHUB_TOKEN  (Required)    empty

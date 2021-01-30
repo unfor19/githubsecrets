@@ -255,7 +255,7 @@ Pull requests are welcome! Ideally, create a feature branch and issue for every 
 1. Add the code of your new feature
 1. Test - generate a Personal Access Token for testing
    ```bash
-   $ (ENV) bash test_functionality.sh -p PROFILE_NAME -o GITHUB_OWNER -t TEST_GITHUB_TOKEN -r GITHUB_REPOSITORY
+   $ (ENV) bash scripts/test_functionality.sh -p PROFILE_NAME -o GITHUB_OWNER -t TEST_GITHUB_TOKEN -r GITHUB_REPOSITORY
    ... # All good? Move on to the next step
    ```
 1. Commit your remarkable changes (`git commit -am 'Added new feature'`)
