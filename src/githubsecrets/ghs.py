@@ -34,7 +34,7 @@ class AliasedGroup(click.Group):
 # @click.group()
 @ click.command(cls=AliasedGroup)
 @ pass_config
-@ click.option('--ci', '-ci', is_flag=True, help="Use this flag to avoid deletion confirmation prompts")  # noqa: E501
+@ click.option('--ci', '-ci', is_flag=True, help="Use this flag to skip confirmation prompts")  # noqa: E501
 def cli(config, ci):
     """All commands can run without providing options, and then you'll be prompted to insert values.\n
 Secrets' values and Personal-Access-Tokens are hidden when prompted"""  # noqa: E501
