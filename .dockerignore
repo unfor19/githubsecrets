@@ -1,5 +1,5 @@
 **
-!./test_functionality.sh
+!./scripts/test_functionality.sh
 !./setup.*
 !./README.md
 !./LICENSE
