@@ -5,6 +5,7 @@
 ARG PYTHON_VERSION="3.9.0"
 ARG APP_NAME="githubsecrets"
 ARG APP_ARTIFACT_DIR="artifact/"
+ARG APP_PYTHON_USERBASE="/githubsecrets"
 ARG APP_HOME_DIR="/app"
 ARG APP_USER_NAME="appuser"
 ARG APP_GROUP_ID="appgroup"
@@ -46,27 +47,30 @@ FROM python:$PYTHON_VERSION-slim as app
 # Fetch values from ARGs that were declared at the top of this file
 ARG APP_NAME
 ARG APP_ARTIFACT_DIR
+ARG APP_PYTHON_USERBASE
 ARG APP_HOME_DIR
 ARG APP_USER_NAME
 ARG APP_GROUP_ID
 
+RUN apt-get update && apt-get install -y libdbus-glib-1-dev gcc
+
 # Define workdir
 ENV HOME="${APP_HOME_DIR}"
-WORKDIR "${HOME}"
+ENV PYTHONUSERBASE="${APP_PYTHON_USERBASE}"
+WORKDIR "${APP_PYTHON_USERBASE}"
 
 # Define env vars
 ENV APP_NAME="${APP_NAME}"
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 ENV PIP_NO_CACHE_DIR=1
-ENV PATH="${HOME}/.local/bin:${PATH}"
-
-RUN apt-get update && apt-get install -y libdbus-glib-1-dev gcc
+ENV PATH="${APP_PYTHON_USERBASE}/bin:${PATH}"
 
 # Run as a non-root user
-RUN addgroup "${APP_GROUP_ID}" && \
+RUN mkdir "${APP_HOME_DIR}" && \
+    addgroup "${APP_GROUP_ID}" && \
     useradd "${APP_USER_NAME}" --gid "${APP_GROUP_ID}" --home-dir "${HOME}" && \
     mkdir "${APP_ARTIFACT_DIR}" && \
-    chown -R ${APP_USER_NAME} .
+    chown -R ${APP_USER_NAME} ${APP_PYTHON_USERBASE} ${HOME}
 USER "${APP_USER_NAME}"
 
 # Upgrade pip, setuptools and wheel
