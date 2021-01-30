@@ -90,5 +90,5 @@ RUN find . -type f -name *.whl -exec pip install --user {} \; -exec rm {} \;  &&
 # CMD python -m ${APP_NAME}
 
 # Use ENTRYPOINT instead CMD to force the container to start the application
-ENTRYPOINT python -m $APP_NAME
+ENTRYPOINT ["ghs"]
 ### --------------------------------------------------------------------
