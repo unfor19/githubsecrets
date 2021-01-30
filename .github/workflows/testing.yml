@@ -25,7 +25,7 @@ jobs:
         env:
           TEST_GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
         run: |
-          bash test_functionality.sh -t $TEST_GITHUB_TOKEN
+          bash scripts/test_functionality.sh -t $TEST_GITHUB_TOKEN
 
   test-macos:
     runs-on: macos-latest
@@ -48,7 +48,7 @@ jobs:
         env:
           TEST_GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
         run: |
-          bash test_functionality.sh -t $TEST_GITHUB_TOKEN
+          bash scripts/test_functionality.sh -t $TEST_GITHUB_TOKEN
 
   test-windows:
     runs-on: windows-latest
@@ -71,4 +71,4 @@ jobs:
         env:
           TEST_GITHUB_TOKEN: ${{ secrets.TEST_GITHUB_TOKEN }}
         run: |
-          bash test_functionality.sh -t $env:TEST_GITHUB_TOKEN
+          bash scripts/test_functionality.sh -t $env:TEST_GITHUB_TOKEN
