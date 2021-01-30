@@ -41,7 +41,7 @@ Python v3.6.7 and above
 <details><summary>Expand/Collapse
  </summary>
 
-Mount a local directory to `root`, the image is available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
+Mount a local directory to `/app`, the image is available at [DockerHub](https://hub.docker.com/r/unfor19/githubsecrets)
 
 #### Linux and macOS
 
