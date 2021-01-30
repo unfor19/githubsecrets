@@ -17,22 +17,39 @@ ARG APP_GROUP_ID="appgroup"
 ### --------------------------------------------------------------------
 FROM python:$PYTHON_VERSION-slim as build
 
+RUN apt-get update && apt-get install -y libdbus-glib-1-dev gcc
+
+ARG APP_PYTHON_USERBASE
+
 # Define env vars
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
-
-# Define workdir
-WORKDIR /code/
 
 # Upgrade pip and then install build tools
 RUN pip install --upgrade pip && \
     pip install --upgrade wheel setuptools wheel check-wheel-contents
 
+# Define workdir
+WORKDIR $APP_PYTHON_USERBASE
+
+
+ENV PYTHONUSERBASE="${APP_PYTHON_USERBASE}"
+ENV PATH="${APP_PYTHON_USERBASE}/bin:${PATH}"
+
+# Copy and install requirements - better caching
+COPY requirements.txt .
+RUN pip install --user -r "requirements.txt"
+
 # Copy the application from Docker build context to WORKDIR
 COPY . .
 
-# Build the application and validate wheel contents
+# Build the application, validate wheel contents and install the application
 RUN python setup.py bdist_wheel && \
-    find dist/ -type f -name *.whl -exec check-wheel-contents {} \;
+    find dist/ -type f -name *.whl \
+    -exec check-wheel-contents {} \; \
+    -exec pip install --user {} \;
+
+WORKDIR /dist/
+RUN mv ${APP_PYTHON_USERBASE}/bin ${APP_PYTHON_USERBASE}/lib ./
 
 # For debugging the Build Stage
 CMD ["bash"]
@@ -51,8 +68,6 @@ ARG APP_PYTHON_USERBASE
 ARG APP_HOME_DIR
 ARG APP_USER_NAME
 ARG APP_GROUP_ID
-
-RUN apt-get update && apt-get install -y libdbus-glib-1-dev gcc
 
 # Define workdir
 ENV HOME="${APP_HOME_DIR}"
@@ -73,22 +88,8 @@ RUN mkdir "${APP_HOME_DIR}" && \
     chown -R ${APP_USER_NAME} ${APP_PYTHON_USERBASE} ${HOME}
 USER "${APP_USER_NAME}"
 
-# Upgrade pip, setuptools and wheel
-RUN pip install --user --upgrade pip && \
-    pip install --user --upgrade setuptools wheel keyrings.alt
-
-# Copy requirements.txt from Build Stage
-COPY --from=build /code/requirements.txt "${APP_ARTIFACT_DIR}"
-
-# Install requirements
-RUN pip install --user -r "${APP_ARTIFACT_DIR}/requirements.txt"
-
 # Copy artifacts from Build Stage
-COPY --from=build /code/dist/ "${APP_ARTIFACT_DIR}"
-
-# Install the application from local wheel package
-RUN find . -type f -name *.whl -exec pip install --user {} \; -exec rm {} \;  && \
-    rm -r "${APP_ARTIFACT_DIR}"
+COPY --from=build /dist/ "${APP_PYTHON_USERBASE}"/
 
 # The container runs the application, or any other supplied command, such as "bash" or "echo hello"
 # CMD python -m ${APP_NAME}
