@@ -1,4 +1,7 @@
 #!/bin/bash
+set -e
+set -o pipefail
+
 error (){
     local msg=$1
     echo -e "\033[31mFATA[0000]\e[0m ${msg}"
